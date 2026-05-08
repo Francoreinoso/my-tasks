@@ -1,0 +1,44 @@
+# Dependencias
+node_modules/
+
+# Builds
+dist/
+build/
+*.tsbuildinfo
+
+# Datos persistidos en runtime (NO subir al repo público)
+backend/data/*.json
+!backend/data/.gitkeep
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Coverage de tests
+coverage/
+*.lcov
+
+# Cache de herramientas
+.cache/
+.eslintcache
+.parcel-cache/
+
+# Vite
+.vite/
+
+# Notas personales / WIP (no subir al repo)
+TODO.md
