@@ -1,0 +1,48 @@
+/*
+ * Variables del tema oscuro/anime de my-tasks.
+ * Cambiarlas acá es lo único necesario para reskinear toda la app.
+ */
+:root {
+  --bg-primary: #0f0e17;
+  --bg-surface: #1a1825;
+  --bg-elevated: #221f33;
+  --accent: #e94560;
+  --accent-soft: #f5a3b6;
+  --accent-muted: #6b2438;
+  --text-primary: #fffffe;
+  --text-muted: #a7a9be;
+  --text-subtle: #6c6e80;
+  --border: #2a2640;
+  --border-strong: #3d3759;
+  --success: #7fd1b9;
+  --warning: #ffba49;
+  --danger: #ef476f;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  --font-sans:
+    'Inter', 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+}
+
+/*
+ * Hacemos que las variables CSS sean accesibles como utilities de Tailwind
+ * vía la directiva @theme (Tailwind v4). Ej: bg-bg-primary, text-accent.
+ */
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-muted: var(--accent-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
+  --color-border-default: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
