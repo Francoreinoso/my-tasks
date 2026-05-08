@@ -10,11 +10,23 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <div className="relative flex min-h-screen text-text-primary">
-      {/* Capa de fondo: gradientes inspirados en estética japonesa nocturna */}
+      {/* Capa 1: imagen de fondo con blur sutil */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 -z-10 bg-bg-primary"
+        className="pointer-events-none fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
         style={{
+          backgroundImage: 'url(/bg-anime-desk.webp)',
+          filter: 'blur(4px)',
+          transform: 'scale(1.05)',
+        }}
+      />
+
+      {/* Capa 2: overlay oscuro + gradientes japoneses para teñir la imagen */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10"
+        style={{
+          backgroundColor: 'rgba(15, 14, 23, 0.80)',
           backgroundImage: [
             'radial-gradient(circle at 20% 25%, rgba(233, 69, 96, 0.10), transparent 55%)',
             'radial-gradient(circle at 80% 75%, rgba(127, 209, 185, 0.06), transparent 55%)',
