@@ -45,14 +45,14 @@ my-tasks/
 ## Requisitos
 
 - Node.js >= 20
-- npm >= 9
+- pnpm >= 10 (instalalo con `npm i -g pnpm` o `corepack enable`)
 - WSL2 (Ubuntu) si estás en Windows
 
 ## Primera vez
 
 ```bash
-cd backend  && npm install
-cd ../frontend && npm install
+cd backend  && pnpm install
+cd ../frontend && pnpm install
 ```
 
 ## Arranque (todos los días)
@@ -75,10 +75,10 @@ Esto arranca:
 
 ```bash
 # terminal 1
-cd backend && npm run dev
+cd backend && pnpm dev
 
 # terminal 2
-cd frontend && npm run dev
+cd frontend && pnpm dev
 ```
 
 **Opción 3 — desde Windows con shortcut en el escritorio:**
@@ -92,9 +92,9 @@ Ver `scripts/windows/README.md` para el paso a paso. Resumen:
 
 ```bash
 # backend
-cd backend && npm test
+cd backend && pnpm test
 # frontend
-cd frontend && npm test
+cd frontend && pnpm test
 ```
 
 ## Convenciones

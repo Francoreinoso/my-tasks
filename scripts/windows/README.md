@@ -66,8 +66,8 @@ servers están listos (~2-5 segundos).
 - Verificá que las dependencias estén instaladas. Desde WSL:
   ```bash
   cd ~/projects/my-tasks
-  cd backend && npm install
-  cd ../frontend && npm install
+  cd backend && pnpm install
+  cd ../frontend && pnpm install
   ```
 
 **`Permission denied` al ejecutar el `.sh`:**

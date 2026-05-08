@@ -24,18 +24,18 @@ done
 # ---- Validaciones de entorno ---------------------------------------------
 if [ ! -d "$ROOT_DIR/backend/node_modules" ]; then
   echo "✖ Falta instalar deps del backend. Corré:"
-  echo "    cd $ROOT_DIR/backend && npm install"
+  echo "    cd $ROOT_DIR/backend && pnpm install"
   exit 1
 fi
 if [ ! -d "$ROOT_DIR/frontend/node_modules" ]; then
   echo "✖ Falta instalar deps del frontend. Corré:"
-  echo "    cd $ROOT_DIR/frontend && npm install"
+  echo "    cd $ROOT_DIR/frontend && pnpm install"
   exit 1
 fi
 
 # ---- Cleanup al recibir Ctrl+C / EXIT ------------------------------------
 # Mata TODO el árbol de procesos descendientes. No alcanza con matar los
-# hijos directos: tsx y vite son nietos (npm run dev → sh → tsx) y quedan
+# hijos directos: tsx y vite son nietos (pnpm dev → sh → tsx) y quedan
 # huérfanos si solo apagás al subshell.
 kill_tree() {
   local parent=$1
@@ -80,10 +80,10 @@ echo "  frontend → http://localhost:5173"
 echo "  Ctrl+C   para apagar ambos"
 echo "============================================================"
 
-(cd "$ROOT_DIR/backend" && npm run dev) &
+(cd "$ROOT_DIR/backend" && pnpm dev) &
 BACKEND_PID=$!
 
-(cd "$ROOT_DIR/frontend" && npm run dev) &
+(cd "$ROOT_DIR/frontend" && pnpm dev) &
 FRONTEND_PID=$!
 
 # ---- Health check + abrir browser opcional -------------------------------
