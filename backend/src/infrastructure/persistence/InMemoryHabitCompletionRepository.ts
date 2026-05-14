@@ -44,4 +44,11 @@ export class InMemoryHabitCompletionRepository implements HabitCompletionReposit
     this.completions.delete(id);
     return Promise.resolve();
   }
+
+  deleteAllByHabit(habitId: string): Promise<void> {
+    for (const [id, c] of this.completions.entries()) {
+      if (c.habitId === habitId) this.completions.delete(id);
+    }
+    return Promise.resolve();
+  }
 }

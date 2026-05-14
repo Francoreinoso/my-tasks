@@ -17,4 +17,5 @@ export interface HabitCompletionRepository {
   ): Promise<HabitCompletion[]>;
   save(completion: HabitCompletion): Promise<void>;
   delete(id: string): Promise<void>;
+  deleteAllByHabit(habitId: string): Promise<void>;
 }

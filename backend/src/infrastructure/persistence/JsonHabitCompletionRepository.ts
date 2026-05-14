@@ -80,6 +80,17 @@ export class JsonHabitCompletionRepository implements HabitCompletionRepository 
     await this.flush();
   }
 
+  async deleteAllByHabit(habitId: string): Promise<void> {
+    let changed = false;
+    for (const [id, c] of this.completions.entries()) {
+      if (c.habitId === habitId) {
+        this.completions.delete(id);
+        changed = true;
+      }
+    }
+    if (changed) await this.flush();
+  }
+
   private async flush(): Promise<void> {
     await fs.mkdir(path.dirname(this.filePath), { recursive: true });
 

@@ -15,6 +15,16 @@ export class HabitValidationError extends Error {
   }
 }
 
+export class HabitArchivedError extends Error {
+  readonly habitId: string;
+
+  constructor(habitId: string) {
+    super(`El hábito "${habitId}" está archivado y no acepta cambios de tracking`);
+    this.name = 'HabitArchivedError';
+    this.habitId = habitId;
+  }
+}
+
 export class HabitCompletionNotFoundError extends Error {
   readonly completionId: string;
 

@@ -92,6 +92,20 @@ describe('JsonHabitCompletionRepository (integración con filesystem)', () => {
     });
   });
 
+  it('deleteAllByHabit elimina todas las completions de un hábito y conserva las de otros', async () => {
+    const repo = await JsonHabitCompletionRepository.load(dbPath);
+    await repo.save(HabitCompletion.create({ habitId: 'h1', date: '2026-05-10' }));
+    await repo.save(HabitCompletion.create({ habitId: 'h1', date: '2026-05-11' }));
+    await repo.save(HabitCompletion.create({ habitId: 'h2', date: '2026-05-10' }));
+
+    await repo.deleteAllByHabit('h1');
+
+    const repo2 = await JsonHabitCompletionRepository.load(dbPath);
+    expect(await repo2.findByHabitInRange('h1', '2026-01-01', '2026-12-31')).toEqual([]);
+    const h2 = await repo2.findByHabitInRange('h2', '2026-01-01', '2026-12-31');
+    expect(h2).toHaveLength(1);
+  });
+
   it('elimina por id y persiste el cambio a disco', async () => {
     const repo = await JsonHabitCompletionRepository.load(dbPath);
     const c = HabitCompletion.create({ habitId: 'h1', date: '2026-05-14' });
