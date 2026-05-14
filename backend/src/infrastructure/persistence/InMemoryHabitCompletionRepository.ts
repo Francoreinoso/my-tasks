@@ -21,6 +21,14 @@ export class InMemoryHabitCompletionRepository implements HabitCompletionReposit
     return Promise.resolve(null);
   }
 
+  findByHabit(habitId: string): Promise<HabitCompletion[]> {
+    const result: HabitCompletion[] = [];
+    for (const c of this.completions.values()) {
+      if (c.habitId === habitId) result.push(c);
+    }
+    return Promise.resolve(result);
+  }
+
   findByHabitInRange(
     habitId: string,
     from: string,

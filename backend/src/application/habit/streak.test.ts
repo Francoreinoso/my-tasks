@@ -100,18 +100,20 @@ describe('calculateStreak', () => {
     expect(calculateStreak(habit, cs, '2026-05-16')).toBe(3);
   });
 
-  it('respeta la cota inferior habit.createdAt: no cuenta días anteriores a la creación', () => {
+  it('cuenta completions retroactivas anteriores a habit.createdAt', () => {
+    // Política: permitimos marcado retroactivo, así que el cálculo de racha
+    // también lo respeta. Si el usuario marca días previos a la creación del
+    // hábito, esos días suman a la racha siempre que sean aplicables.
     const habit = Habit.fromPersistence({
       id: 'h1',
       name: 'X',
       description: null,
       frequency: { kind: 'daily' },
-      createdAt: new Date('2026-05-12T00:00:00Z'),
-      updatedAt: new Date('2026-05-12T00:00:00Z'),
+      createdAt: new Date('2026-05-14T00:00:00Z'),
+      updatedAt: new Date('2026-05-14T00:00:00Z'),
       archivedAt: null,
     });
     const cs = [
-      completion('2026-05-10'), // antes de createdAt, no debería contar
       completion('2026-05-12'),
       completion('2026-05-13'),
       completion('2026-05-14'),

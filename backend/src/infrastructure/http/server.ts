@@ -1,12 +1,18 @@
 import express, { type Express } from 'express';
 import cors from 'cors';
 import type { TaskRepository } from '@/domain/task/TaskRepository.js';
+import type { HabitRepository } from '@/domain/habit/HabitRepository.js';
+import type { HabitCompletionRepository } from '@/domain/habit/HabitCompletionRepository.js';
 import { makeTaskController } from './controllers/taskController.js';
 import { makeTaskRouter } from './routes/taskRoutes.js';
+import { makeHabitController } from './controllers/habitController.js';
+import { makeHabitRouter } from './routes/habitRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 export interface ServerDeps {
   taskRepository: TaskRepository;
+  habitRepository: HabitRepository;
+  habitCompletionRepository: HabitCompletionRepository;
   corsOrigin: string | string[];
 }
 
@@ -26,6 +32,12 @@ export function createApp(deps: ServerDeps): Express {
 
   const taskController = makeTaskController(deps.taskRepository);
   app.use('/api/tasks', makeTaskRouter(taskController));
+
+  const habitController = makeHabitController(
+    deps.habitRepository,
+    deps.habitCompletionRepository,
+  );
+  app.use('/api/habits', makeHabitRouter(habitController));
 
   app.use(errorHandler);
 

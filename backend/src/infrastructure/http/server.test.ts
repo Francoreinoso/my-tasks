@@ -2,10 +2,17 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
 import { createApp } from './server.js';
 import { InMemoryTaskRepository } from '@/infrastructure/persistence/InMemoryTaskRepository.js';
+import { InMemoryHabitRepository } from '@/infrastructure/persistence/InMemoryHabitRepository.js';
+import { InMemoryHabitCompletionRepository } from '@/infrastructure/persistence/InMemoryHabitCompletionRepository.js';
 
 function buildApp() {
   const repo = new InMemoryTaskRepository();
-  const app = createApp({ taskRepository: repo, corsOrigin: 'http://localhost:5173' });
+  const app = createApp({
+    taskRepository: repo,
+    habitRepository: new InMemoryHabitRepository(),
+    habitCompletionRepository: new InMemoryHabitCompletionRepository(),
+    corsOrigin: 'http://localhost:5173',
+  });
   return { app, repo };
 }
 

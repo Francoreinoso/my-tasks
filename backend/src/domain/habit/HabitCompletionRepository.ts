@@ -10,6 +10,7 @@ import type { HabitCompletion } from './HabitCompletion.js';
 export interface HabitCompletionRepository {
   findById(id: string): Promise<HabitCompletion | null>;
   findByHabitAndDate(habitId: string, date: string): Promise<HabitCompletion | null>;
+  findByHabit(habitId: string): Promise<HabitCompletion[]>;
   findByHabitInRange(
     habitId: string,
     from: string,
