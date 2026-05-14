@@ -9,6 +9,7 @@ export interface NavItem {
 export const NAV_ITEMS: readonly NavItem[] = [
   { id: 'tasks', label: 'Tareas', icon: '📋', path: '/', enabled: true },
   { id: 'week', label: 'Semana', icon: '📅', path: '/semana', enabled: true },
+  { id: 'rutina', label: 'Rutina', icon: '🔁', path: '/rutina', enabled: true },
   { id: 'study', label: 'Estudio', icon: '📚', path: '/estudio', enabled: false },
   { id: 'notes', label: 'Notas', icon: '📝', path: '/notas', enabled: false },
 ] as const;
