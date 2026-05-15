@@ -22,6 +22,11 @@ const noopProps = {
   onArchive: vi.fn(),
   onUnarchive: vi.fn(),
   onDelete: vi.fn(),
+  onMark: vi.fn(),
+  onUnmark: vi.fn(),
+  completionsByHabit: {},
+  statsByHabit: {},
+  trackerDays: ['2026-05-14'],
 };
 
 describe('HabitList', () => {

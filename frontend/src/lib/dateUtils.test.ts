@@ -12,6 +12,8 @@ import {
   getWeekDayName,
   formatWeekRange,
   isValidIsoDate,
+  lastNDays,
+  getWeekday,
 } from './dateUtils';
 
 afterEach(() => {
@@ -162,5 +164,46 @@ describe('isValidIsoDate', () => {
     expect(isValidIsoDate('2026-02-30')).toBe(false);
     expect(isValidIsoDate('15-05-2026')).toBe(false);
     expect(isValidIsoDate('')).toBe(false);
+  });
+});
+
+describe('lastNDays', () => {
+  it('devuelve N días ordenados con asOf al final', () => {
+    expect(lastNDays(7, '2026-05-14')).toEqual([
+      '2026-05-08',
+      '2026-05-09',
+      '2026-05-10',
+      '2026-05-11',
+      '2026-05-12',
+      '2026-05-13',
+      '2026-05-14',
+    ]);
+  });
+
+  it('lastNDays(1) devuelve solo asOf', () => {
+    expect(lastNDays(1, '2026-05-14')).toEqual(['2026-05-14']);
+  });
+
+  it('cruza correctamente borde de mes', () => {
+    expect(lastNDays(3, '2026-06-01')).toEqual([
+      '2026-05-30',
+      '2026-05-31',
+      '2026-06-01',
+    ]);
+  });
+
+  it('por defecto asOf es hoy', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2026, 4, 14, 12, 0));
+    expect(lastNDays(2)).toEqual(['2026-05-13', '2026-05-14']);
+  });
+});
+
+describe('getWeekday', () => {
+  it('devuelve 0 para domingo y 6 para sábado', () => {
+    // 2026-05-17 es domingo, 2026-05-16 es sábado, 2026-05-11 es lunes
+    expect(getWeekday('2026-05-17')).toBe(0);
+    expect(getWeekday('2026-05-16')).toBe(6);
+    expect(getWeekday('2026-05-11')).toBe(1);
   });
 });

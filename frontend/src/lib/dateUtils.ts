@@ -82,6 +82,25 @@ export function isoToday(): string {
   return toIsoDate(new Date());
 }
 
+/**
+ * Devuelve un array con los últimos N días en ISO YYYY-MM-DD, ordenados de
+ * más viejo a más nuevo (el último elemento es asOf). El default de asOf es hoy.
+ */
+export function lastNDays(n: number, asOfIso: string = isoToday()): string[] {
+  const asOf = fromIsoDate(asOfIso);
+  const days: string[] = [];
+  for (let i = n - 1; i >= 0; i--) {
+    const d = new Date(asOf.getFullYear(), asOf.getMonth(), asOf.getDate() - i);
+    days.push(toIsoDate(d));
+  }
+  return days;
+}
+
+/** Devuelve el día de la semana 0-6 (0=Domingo) para una fecha ISO. */
+export function getWeekday(iso: string): number {
+  return fromIsoDate(iso).getDay();
+}
+
 export function formatDDMMYYYY(iso: string): string {
   if (!ISO_DATE_REGEX.test(iso)) return iso;
   const [y, m, d] = iso.split('-');
