@@ -41,8 +41,12 @@ export function HabitTracker({
   };
 
   return (
-    <div className="flex items-center justify-between gap-4">
-      <div role="group" aria-label="Últimos días" className="flex gap-1">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        role="group"
+        aria-label="Últimos días"
+        className="flex justify-between gap-1 sm:justify-start"
+      >
         {days.map((date) => {
           const completed = completedDates.has(date);
           const applicable = isApplicableOn(habit.frequency, date);
@@ -57,17 +61,21 @@ export function HabitTracker({
               aria-label={`${weekdayLabel} ${date}${completed ? ' (cumplido)' : ''}`}
               aria-pressed={completed}
               className={[
-                'flex h-9 w-9 flex-col items-center justify-center rounded-md border text-xs font-medium transition-colors',
+                'flex h-10 w-10 flex-col items-center justify-center rounded-md border text-xs font-medium transition-all active:scale-95',
                 completed
-                  ? 'border-accent bg-accent/20 text-accent'
+                  ? 'border-accent bg-accent/25 text-accent-soft shadow-[0_0_12px_-4px_var(--accent)]'
                   : applicable
-                    ? 'border-border-default bg-bg-surface/40 text-text-muted hover:border-border-strong hover:text-text-primary'
-                    : 'border-border-default/40 bg-bg-surface/20 text-text-subtle/60 hover:border-border-default',
-                isToday ? 'ring-2 ring-accent/40 ring-offset-1 ring-offset-bg-surface' : '',
+                    ? 'border-border-default bg-bg-surface/50 text-text-muted hover:border-accent/60 hover:bg-bg-elevated hover:text-text-primary'
+                    : 'border-border-default/30 bg-bg-surface/20 text-text-subtle/50 hover:border-border-default/60',
+                isToday && !completed
+                  ? 'ring-1 ring-inset ring-accent/50'
+                  : '',
               ].join(' ')}
             >
-              <span aria-hidden="true">{weekdayLabel}</span>
-              <span aria-hidden="true" className="text-[10px] leading-none">
+              <span aria-hidden="true" className="leading-none">
+                {weekdayLabel}
+              </span>
+              <span aria-hidden="true" className="text-[11px] leading-none">
                 {completed ? '✓' : applicable ? '' : '·'}
               </span>
             </button>
@@ -75,11 +83,11 @@ export function HabitTracker({
         })}
       </div>
 
-      <div className="flex min-w-[90px] flex-col items-end gap-0.5">
+      <div className="flex items-center justify-end gap-3 sm:min-w-[110px] sm:flex-col sm:items-end sm:gap-0.5">
         {stats ? (
           <>
             <span
-              className="font-medium text-text-primary"
+              className="text-base font-semibold text-text-primary"
               aria-label={`Racha de ${String(stats.streak)} días`}
             >
               🔥 {stats.streak}

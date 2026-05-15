@@ -32,9 +32,18 @@ export function HabitList({
 
   if (habits.length === 0) {
     return (
-      <p className="rounded-md border border-dashed border-border-default px-4 py-8 text-center text-sm text-text-muted">
-        Todavía no tenés hábitos. Creá el primero con el formulario de arriba.
-      </p>
+      <div className="rounded-lg border border-dashed border-border-default bg-bg-surface/30 px-6 py-10 text-center backdrop-blur-sm">
+        <p className="mb-2 text-4xl" aria-hidden="true">
+          🌱
+        </p>
+        <p className="text-base font-medium text-text-primary">
+          Tu rutina arranca acá
+        </p>
+        <p className="mx-auto mt-1 max-w-xs text-sm text-text-muted">
+          Creá tu primer hábito arriba. Empezá con algo chico y diario — la
+          constancia se mide, no se promete.
+        </p>
+      </div>
     );
   }
 
@@ -46,15 +55,19 @@ export function HabitList({
         ) : (
           <div role="list" className="flex flex-col gap-3">
             {active.map((h) => (
-              <div key={h.id} className="flex flex-col gap-2">
+              <article
+                key={h.id}
+                className="mt-fade-in-up group rounded-lg border border-border-default bg-bg-surface/60 px-4 py-3 backdrop-blur-sm transition-colors hover:border-border-strong"
+              >
                 <HabitItem
                   habit={h}
+                  variant="bare"
                   onUpdateName={onUpdateName}
                   onArchive={onArchive}
                   onUnarchive={onUnarchive}
                   onDelete={onDelete}
                 />
-                <div className="ml-2 rounded-md border border-border-default/40 bg-bg-surface/30 px-3 py-2 backdrop-blur-sm">
+                <div className="mt-3 border-t border-border-default/40 pt-3">
                   <HabitTracker
                     habit={h}
                     completions={completionsByHabit[h.id] ?? []}
@@ -64,7 +77,7 @@ export function HabitList({
                     onUnmark={(date) => onUnmark(h.id, date)}
                   />
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         )}

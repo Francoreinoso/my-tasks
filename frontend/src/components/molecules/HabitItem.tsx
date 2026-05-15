@@ -7,6 +7,12 @@ interface HabitItemProps {
   onArchive: (id: string) => void;
   onUnarchive: (id: string) => void;
   onDelete: (id: string) => void;
+  /**
+   * 'card' (default): contenedor con borde y bg propios.
+   * 'bare': sin borde ni bg; el padre se encarga del container visual.
+   * Útil cuando HabitItem se compone dentro de un card mayor (ej. con tracker).
+   */
+  variant?: 'card' | 'bare';
 }
 
 const DAY_SHORT: Record<number, string> = {
@@ -44,11 +50,16 @@ export function HabitItem({
   onArchive,
   onUnarchive,
   onDelete,
+  variant = 'card',
 }: HabitItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(habit.name);
 
   const isArchived = habit.archivedAt !== null;
+  const containerClasses =
+    variant === 'card'
+      ? 'rounded-md border border-border-default bg-bg-surface/60 px-4 py-3 backdrop-blur-sm hover:border-border-strong'
+      : '';
 
   const commit = () => {
     const trimmed = draft.trim();
@@ -74,7 +85,7 @@ export function HabitItem({
   return (
     <div
       role="listitem"
-      className={`group flex items-center gap-3 rounded-md border border-border-default bg-bg-surface/60 px-4 py-3 backdrop-blur-sm transition-colors hover:border-border-strong ${
+      className={`group flex items-center gap-3 transition-colors ${containerClasses} ${
         isArchived ? 'opacity-60' : ''
       }`}
     >

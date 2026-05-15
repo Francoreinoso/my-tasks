@@ -32,7 +32,7 @@ const noopProps = {
 describe('HabitList', () => {
   it('muestra un mensaje cuando no hay hábitos', () => {
     render(<HabitList habits={[]} {...noopProps} />);
-    expect(screen.getByText(/todavía no tenés hábitos/i)).toBeInTheDocument();
+    expect(screen.getByText(/tu rutina arranca acá/i)).toBeInTheDocument();
   });
 
   it('separa hábitos activos y archivados en secciones distintas', () => {

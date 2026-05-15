@@ -29,3 +29,25 @@ body {
 button {
   font-family: inherit;
 }
+
+@keyframes mt-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mt-fade-in-up {
+  animation: mt-fade-in-up 220ms ease-out both;
+}
+
+/* Respetar usuarios que prefieren menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  .mt-fade-in-up {
+    animation: none;
+  }
+}
