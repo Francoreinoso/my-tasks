@@ -4,6 +4,7 @@ import { JsonTaskRepository } from '@/infrastructure/persistence/JsonTaskReposit
 import { JsonHabitRepository } from '@/infrastructure/persistence/JsonHabitRepository.js';
 import { JsonHabitCompletionRepository } from '@/infrastructure/persistence/JsonHabitCompletionRepository.js';
 import { JsonNoteRepository } from '@/infrastructure/persistence/JsonNoteRepository.js';
+import { JsonStudyTopicRepository } from '@/infrastructure/persistence/JsonStudyTopicRepository.js';
 import { createApp } from '@/infrastructure/http/server.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -14,6 +15,7 @@ const TASKS_FILE = path.join(DATA_DIR, 'tasks.json');
 const HABITS_FILE = path.join(DATA_DIR, 'habits.json');
 const HABIT_COMPLETIONS_FILE = path.join(DATA_DIR, 'habit-completions.json');
 const NOTES_FILE = path.join(DATA_DIR, 'notes.json');
+const STUDY_FILE = path.join(DATA_DIR, 'study.json');
 const FRONTEND_ORIGIN = process.env['FRONTEND_ORIGIN'] ?? 'http://localhost:5173';
 
 async function main(): Promise<void> {
@@ -23,11 +25,13 @@ async function main(): Promise<void> {
     HABIT_COMPLETIONS_FILE,
   );
   const noteRepository = await JsonNoteRepository.load(NOTES_FILE);
+  const studyTopicRepository = await JsonStudyTopicRepository.load(STUDY_FILE);
   const app = createApp({
     taskRepository,
     habitRepository,
     habitCompletionRepository,
     noteRepository,
+    studyTopicRepository,
     corsOrigin: FRONTEND_ORIGIN,
   });
 

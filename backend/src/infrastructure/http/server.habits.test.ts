@@ -6,6 +6,7 @@ import { InMemoryTaskRepository } from '@/infrastructure/persistence/InMemoryTas
 import { InMemoryHabitRepository } from '@/infrastructure/persistence/InMemoryHabitRepository.js';
 import { InMemoryHabitCompletionRepository } from '@/infrastructure/persistence/InMemoryHabitCompletionRepository.js';
 import { InMemoryNoteRepository } from '@/infrastructure/persistence/InMemoryNoteRepository.js';
+import { InMemoryStudyTopicRepository } from '@/infrastructure/persistence/InMemoryStudyTopicRepository.js';
 
 function buildApp(): Express {
   return createApp({
@@ -13,6 +14,7 @@ function buildApp(): Express {
     habitRepository: new InMemoryHabitRepository(),
     habitCompletionRepository: new InMemoryHabitCompletionRepository(),
     noteRepository: new InMemoryNoteRepository(),
+    studyTopicRepository: new InMemoryStudyTopicRepository(),
     corsOrigin: 'http://localhost:5173',
   });
 }

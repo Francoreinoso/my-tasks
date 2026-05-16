@@ -4,12 +4,15 @@ import type { TaskRepository } from '@/domain/task/TaskRepository.js';
 import type { HabitRepository } from '@/domain/habit/HabitRepository.js';
 import type { HabitCompletionRepository } from '@/domain/habit/HabitCompletionRepository.js';
 import type { NoteRepository } from '@/domain/note/NoteRepository.js';
+import type { StudyTopicRepository } from '@/domain/study/StudyTopicRepository.js';
 import { makeTaskController } from './controllers/taskController.js';
 import { makeTaskRouter } from './routes/taskRoutes.js';
 import { makeHabitController } from './controllers/habitController.js';
 import { makeHabitRouter } from './routes/habitRoutes.js';
 import { makeNoteController } from './controllers/noteController.js';
 import { makeNoteRouter } from './routes/noteRoutes.js';
+import { makeStudyController } from './controllers/studyController.js';
+import { makeStudyRouter } from './routes/studyRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 export interface ServerDeps {
@@ -17,6 +20,7 @@ export interface ServerDeps {
   habitRepository: HabitRepository;
   habitCompletionRepository: HabitCompletionRepository;
   noteRepository: NoteRepository;
+  studyTopicRepository: StudyTopicRepository;
   corsOrigin: string | string[];
 }
 
@@ -45,6 +49,9 @@ export function createApp(deps: ServerDeps): Express {
 
   const noteController = makeNoteController(deps.noteRepository);
   app.use('/api/notes', makeNoteRouter(noteController));
+
+  const studyController = makeStudyController(deps.studyTopicRepository);
+  app.use('/api/study', makeStudyRouter(studyController));
 
   app.use(errorHandler);
 
