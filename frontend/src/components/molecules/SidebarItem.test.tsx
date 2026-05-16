@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
+import { ClipboardText, CalendarCheck } from '@phosphor-icons/react';
 import { SidebarItem } from './SidebarItem';
 import type { NavItem } from '@/types/navigation';
 
@@ -16,7 +17,7 @@ describe('SidebarItem', () => {
   const enabledItem: NavItem = {
     id: 'tasks',
     label: 'Tareas',
-    icon: '📋',
+    icon: ClipboardText,
     path: '/',
     enabled: true,
   };
@@ -24,7 +25,7 @@ describe('SidebarItem', () => {
   const disabledItem: NavItem = {
     id: 'week',
     label: 'Semana',
-    icon: '📅',
+    icon: CalendarCheck,
     path: '/semana',
     enabled: false,
   };
@@ -42,10 +43,10 @@ describe('SidebarItem', () => {
     expect(item.closest('[aria-disabled="true"]')).not.toBeNull();
   });
 
-  it('cuando colapsado oculta el label pero deja el icono', () => {
+  it('cuando colapsado oculta el label pero deja el ícono SVG', () => {
     renderItem(enabledItem, true);
     const link = screen.getByRole('link');
-    expect(link).toHaveTextContent('📋');
+    expect(link.querySelector('svg')).not.toBeNull();
     expect(screen.queryByText('Tareas')).not.toBeInTheDocument();
   });
 

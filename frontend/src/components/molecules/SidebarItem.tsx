@@ -7,6 +7,7 @@ interface SidebarItemProps {
 }
 
 export function SidebarItem({ item, collapsed }: SidebarItemProps) {
+  const Icon = item.icon;
   const baseClasses =
     'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors';
 
@@ -17,9 +18,7 @@ export function SidebarItem({ item, collapsed }: SidebarItemProps) {
         title="Próximamente"
         className={`${baseClasses} cursor-not-allowed text-text-subtle`}
       >
-        <span aria-hidden="true" className="text-lg">
-          {item.icon}
-        </span>
+        <Icon weight="light" size={20} aria-hidden="true" />
         {!collapsed && (
           <span className="flex-1">
             {item.label}
@@ -43,9 +42,7 @@ export function SidebarItem({ item, collapsed }: SidebarItemProps) {
       }
       aria-label={item.label}
     >
-      <span aria-hidden="true" className="text-lg">
-        {item.icon}
-      </span>
+      <Icon weight="light" size={20} aria-hidden="true" />
       {!collapsed && <span>{item.label}</span>}
     </NavLink>
   );
