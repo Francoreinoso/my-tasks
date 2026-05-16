@@ -4,6 +4,7 @@ import { createApp } from './server.js';
 import { InMemoryTaskRepository } from '@/infrastructure/persistence/InMemoryTaskRepository.js';
 import { InMemoryHabitRepository } from '@/infrastructure/persistence/InMemoryHabitRepository.js';
 import { InMemoryHabitCompletionRepository } from '@/infrastructure/persistence/InMemoryHabitCompletionRepository.js';
+import { InMemoryNoteRepository } from '@/infrastructure/persistence/InMemoryNoteRepository.js';
 
 function buildApp() {
   const repo = new InMemoryTaskRepository();
@@ -11,6 +12,7 @@ function buildApp() {
     taskRepository: repo,
     habitRepository: new InMemoryHabitRepository(),
     habitCompletionRepository: new InMemoryHabitCompletionRepository(),
+    noteRepository: new InMemoryNoteRepository(),
     corsOrigin: 'http://localhost:5173',
   });
   return { app, repo };

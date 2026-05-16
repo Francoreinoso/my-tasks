@@ -7,6 +7,7 @@ import {
   HabitCompletionNotFoundError,
   HabitCompletionValidationError,
 } from '@/domain/habit/errors.js';
+import { NoteNotFoundError, NoteValidationError } from '@/domain/note/errors.js';
 import { QueryValidationError } from '@/infrastructure/http/errors.js';
 
 /**
@@ -49,9 +50,17 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     return;
   }
 
+  if (err instanceof NoteNotFoundError) {
+    res.status(404).json({
+      error: { code: 'NOTE_NOT_FOUND', message: err.message },
+    });
+    return;
+  }
+
   if (
     err instanceof HabitValidationError ||
     err instanceof HabitCompletionValidationError ||
+    err instanceof NoteValidationError ||
     err instanceof QueryValidationError
   ) {
     res.status(400).json({

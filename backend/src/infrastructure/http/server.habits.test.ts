@@ -5,12 +5,14 @@ import { createApp } from './server.js';
 import { InMemoryTaskRepository } from '@/infrastructure/persistence/InMemoryTaskRepository.js';
 import { InMemoryHabitRepository } from '@/infrastructure/persistence/InMemoryHabitRepository.js';
 import { InMemoryHabitCompletionRepository } from '@/infrastructure/persistence/InMemoryHabitCompletionRepository.js';
+import { InMemoryNoteRepository } from '@/infrastructure/persistence/InMemoryNoteRepository.js';
 
 function buildApp(): Express {
   return createApp({
     taskRepository: new InMemoryTaskRepository(),
     habitRepository: new InMemoryHabitRepository(),
     habitCompletionRepository: new InMemoryHabitCompletionRepository(),
+    noteRepository: new InMemoryNoteRepository(),
     corsOrigin: 'http://localhost:5173',
   });
 }
