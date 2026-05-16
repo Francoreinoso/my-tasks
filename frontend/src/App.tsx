@@ -4,6 +4,7 @@ import { TasksPage } from '@/pages/TasksPage';
 import { WeekPage } from '@/pages/WeekPage';
 import { RutinaPage } from '@/pages/RutinaPage';
 import { NotasPage } from '@/pages/NotasPage';
+import { EstudioPage } from '@/pages/EstudioPage';
 
 export function App() {
   return (
@@ -14,6 +15,7 @@ export function App() {
           <Route path="/semana" element={<WeekPage />} />
           <Route path="/rutina" element={<RutinaPage />} />
           <Route path="/notas" element={<NotasPage />} />
+          <Route path="/estudio" element={<EstudioPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AppLayout>
