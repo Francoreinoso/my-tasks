@@ -24,7 +24,7 @@ export function DraggableTaskItem(props: DraggableTaskItemProps) {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <TaskItem {...props} showDueDate={false} />
+      <TaskItem {...props} showDueDate={false} showDescription={false} />
     </div>
   );
 }

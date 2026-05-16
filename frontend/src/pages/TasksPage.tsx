@@ -1,12 +1,13 @@
 import { useTasks } from '@/hooks/useTasks';
 import { NewTaskForm } from '@/components/molecules/NewTaskForm';
 import { TaskList } from '@/components/organisms/TaskList';
+import type { CreateTaskInput } from '@/types/task';
 
 export function TasksPage() {
   const { tasks, status, error, create, toggle, update, remove } = useTasks();
 
-  const handleCreate = async (title: string) => {
-    await create({ title });
+  const handleCreate = async (input: CreateTaskInput) => {
+    await create(input);
   };
 
   return (

@@ -121,6 +121,132 @@ describe('TaskItem', () => {
     expect(onUpdate).not.toHaveBeenCalled();
   });
 
+  describe('description', () => {
+    it('muestra la descripción debajo del título cuando existe', () => {
+      render(
+        <TaskItem
+          task={makeTask({ description: 'Línea uno\nLínea dos' })}
+          onToggle={vi.fn()}
+          onUpdate={vi.fn()}
+          onDelete={vi.fn()}
+        />,
+      );
+      expect(screen.getByText(/Línea uno/)).toBeInTheDocument();
+      expect(screen.getByText(/Línea dos/)).toBeInTheDocument();
+    });
+
+    it('muestra el botón "+ agregar detalles" cuando la descripción es null', () => {
+      render(
+        <TaskItem
+          task={makeTask({ description: null })}
+          onToggle={vi.fn()}
+          onUpdate={vi.fn()}
+          onDelete={vi.fn()}
+        />,
+      );
+      expect(screen.getByRole('button', { name: /agregar detalles/i })).toBeInTheDocument();
+    });
+
+    it('al hacer doble click sobre la descripción entra en modo edición', async () => {
+      const user = userEvent.setup();
+      render(
+        <TaskItem
+          task={makeTask({ description: 'detalles existentes' })}
+          onToggle={vi.fn()}
+          onUpdate={vi.fn()}
+          onDelete={vi.fn()}
+        />,
+      );
+
+      await user.dblClick(
+        screen.getByRole('button', { name: /editar detalles/i }),
+      );
+      expect(screen.getByRole('textbox', { name: /editar detalles/i })).toBeInTheDocument();
+    });
+
+    it('Enter guarda; Shift+Enter inserta salto de línea', async () => {
+      const onUpdate = vi.fn();
+      const user = userEvent.setup();
+      render(
+        <TaskItem
+          task={makeTask({ description: 'viejo' })}
+          onToggle={vi.fn()}
+          onUpdate={onUpdate}
+          onDelete={vi.fn()}
+        />,
+      );
+
+      await user.dblClick(screen.getByRole('button', { name: /editar detalles/i }));
+      const textarea = screen.getByRole('textbox', { name: /editar detalles/i });
+      await user.clear(textarea);
+      await user.type(
+        textarea,
+        'línea 1{Shift>}{Enter}{/Shift}línea 2{Enter}',
+      );
+
+      expect(onUpdate).toHaveBeenCalledWith('t-1', {
+        description: 'línea 1\nlínea 2',
+      });
+    });
+
+    it('Escape cancela la edición sin guardar', async () => {
+      const onUpdate = vi.fn();
+      const user = userEvent.setup();
+      render(
+        <TaskItem
+          task={makeTask({ description: 'original' })}
+          onToggle={vi.fn()}
+          onUpdate={onUpdate}
+          onDelete={vi.fn()}
+        />,
+      );
+
+      await user.dblClick(screen.getByRole('button', { name: /editar detalles/i }));
+      const textarea = screen.getByRole('textbox', { name: /editar detalles/i });
+      await user.clear(textarea);
+      await user.type(textarea, 'borrador');
+      await user.keyboard('{Escape}');
+
+      expect(onUpdate).not.toHaveBeenCalled();
+    });
+
+    it('al borrar todo el contenido y guardar, se manda description: null', async () => {
+      const onUpdate = vi.fn();
+      const user = userEvent.setup();
+      render(
+        <TaskItem
+          task={makeTask({ description: 'algo' })}
+          onToggle={vi.fn()}
+          onUpdate={onUpdate}
+          onDelete={vi.fn()}
+        />,
+      );
+
+      await user.dblClick(screen.getByRole('button', { name: /editar detalles/i }));
+      const textarea = screen.getByRole('textbox', { name: /editar detalles/i });
+      await user.clear(textarea);
+      await user.keyboard('{Enter}');
+
+      expect(onUpdate).toHaveBeenCalledWith('t-1', { description: null });
+    });
+
+    it('cuando showDescription es false, no se muestra ni la descripción ni el affordance', () => {
+      render(
+        <TaskItem
+          task={makeTask({ description: 'no debería aparecer' })}
+          onToggle={vi.fn()}
+          onUpdate={vi.fn()}
+          onDelete={vi.fn()}
+          showDescription={false}
+        />,
+      );
+      expect(screen.queryByText(/no debería aparecer/)).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /agregar detalles/i }),
+      ).not.toBeInTheDocument();
+    });
+  });
+
   describe('dueDate', () => {
     it('muestra "sin día" cuando la tarea no tiene dueDate', () => {
       render(
