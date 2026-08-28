@@ -1,11 +1,7 @@
 # my-tasks
 
 Aplicación personal para gestionar tareas pendientes, planificación semanal, ideas de
-estudio y notas. Pensada para uso local desde el escritorio (Windows + WSL).
-
-> Estado actual: **MVP funcional**. Vista de "Tareas" implementada con CRUD completo,
-> persistencia atómica a JSON. Las otras vistas (Semana, Estudio, Notas) llegan en
-> próximas iteraciones.
+estudio y notas.
 
 ## Stack
 
@@ -116,7 +112,3 @@ cd frontend && pnpm test
 | `FRONTEND_ORIGIN` (backend) | `http://localhost:5173` | Origen permitido por CORS |
 | `VITE_API_URL` (frontend) | `http://localhost:4000/api` | Base URL del API |
 
-## Plan de trabajo
-
-Ver `~/.claude/plans/desarrollemos-el-proyecto-my-spicy-beacon.md` para el plan
-completo (contexto, decisiones, fases, verificación).
