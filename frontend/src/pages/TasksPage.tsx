@@ -13,7 +13,7 @@ export function TasksPage() {
   return (
     <section className="mx-auto max-w-3xl">
       <header className="mb-6">
-        <h2 className="font-mono text-3xl tracking-tight text-text-primary">Tareas</h2>
+        <h2 className="font-serif text-3xl tracking-tight text-text-primary">Tareas</h2>
         <p className="text-sm text-text-muted">
           Tus pendientes. Doble click sobre el título para editar. Click en el icono 📅 para
           asignar día.

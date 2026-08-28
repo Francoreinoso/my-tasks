@@ -45,9 +45,9 @@ export function RutinaPage() {
   return (
     <section className="mx-auto max-w-3xl">
       <header className="mb-6">
-        <h2 className="font-mono text-3xl tracking-tight text-text-primary">Rutina</h2>
+        <h2 className="font-serif text-3xl tracking-tight text-text-primary">Rutina</h2>
         <p className="text-sm text-text-muted">
-          Tus hábitos. Definí qué hacer cada día (o ciertos días) y marcá los que
+          Tus hábitos. Define qué hacer cada día (o ciertos días) y marca los que
           cumpliste. Doble click sobre el nombre para editar.
         </p>
       </header>

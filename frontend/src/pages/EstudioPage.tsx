@@ -22,9 +22,9 @@ export function EstudioPage() {
   return (
     <section className="mx-auto max-w-4xl">
       <header className="mb-6">
-        <h2 className="font-mono text-3xl tracking-tight text-text-primary">Estudio</h2>
+        <h2 className="font-serif text-3xl tracking-tight text-text-primary">Estudio</h2>
         <p className="text-sm text-text-muted">
-          Temas que querés aprender, con recursos y subtemas. Doble click para editar.
+          Temas que quieres aprender, con recursos y subtemas. Doble click para editar.
         </p>
       </header>
 
@@ -53,9 +53,9 @@ export function EstudioPage() {
           role="status"
           className="rounded-lg border border-dashed border-border-default bg-bg-surface/40 p-10 text-center text-text-muted"
         >
-          <p className="text-sm">Todavía no tenés temas de estudio.</p>
+          <p className="text-sm">Todavía no tienes temas de estudio.</p>
           <p className="text-xs text-text-subtle">
-            Creá tu primer tema arriba — por ejemplo "React" o "Inglés".
+            Crea tu primer tema arriba — por ejemplo "React" o "Inglés".
           </p>
         </div>
       ) : (

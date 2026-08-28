@@ -35,7 +35,7 @@ export function NotasPage() {
     <section className="mx-auto max-w-6xl">
       <header className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 className="font-mono text-3xl tracking-tight text-text-primary">Notas</h2>
+          <h2 className="font-serif text-3xl tracking-tight text-text-primary">Notas</h2>
           <p className="text-sm text-text-muted">
             Tu pizarra de notas. Click en una nota para editarla.
           </p>

@@ -143,6 +143,7 @@ export function TaskItem({
           <div className="shrink-0">
             {isEditingDate ? (
               <input
+                ref={(el) => { try { el?.showPicker?.(); } catch {} }}
                 autoFocus
                 type="date"
                 value={task.dueDate ?? ''}

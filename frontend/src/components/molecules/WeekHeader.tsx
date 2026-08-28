@@ -19,7 +19,7 @@ export function WeekHeader({
   return (
     <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
       <div>
-        <h2 className="font-mono text-3xl tracking-tight text-text-primary">Semana</h2>
+        <h2 className="font-serif text-3xl tracking-tight text-text-primary">Semana</h2>
         <p className="text-sm text-text-muted">
           <span aria-label="Rango de fechas" className="font-mono">
             {formatWeekRange(weekStart)}

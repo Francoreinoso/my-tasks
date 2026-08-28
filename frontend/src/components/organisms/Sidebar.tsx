@@ -16,7 +16,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
     >
       <header className="flex items-center justify-between border-b border-border-default p-4">
         {!collapsed && (
-          <h1 className="font-mono text-lg tracking-tight text-accent">my-tasks</h1>
+          <h1 className="font-mono text-lg tracking-tight text-accent">My Tasks</h1>
         )}
         <button
           type="button"
