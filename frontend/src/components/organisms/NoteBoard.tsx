@@ -14,9 +14,9 @@ export function NoteBoard({ notes, onOpen, onDelete }: NoteBoardProps) {
         role="status"
         className="rounded-lg border border-dashed border-border-default bg-bg-surface/40 p-10 text-center text-text-muted"
       >
-        <p className="text-sm">Todavía no tenés notas.</p>
+        <p className="text-sm">Todavía no tienes notas.</p>
         <p className="text-xs text-text-subtle">
-          Tocá <span className="font-medium text-text-muted">Nueva nota</span> para
+          Toca <span className="font-medium text-text-muted">Nueva nota</span> para
           crear la primera.
         </p>
       </div>

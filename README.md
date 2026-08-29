@@ -1,114 +1,121 @@
-# my-tasks
+# My Tasks
 
-Aplicación personal para gestionar tareas pendientes, planificación semanal, ideas de
-estudio y notas.
+Aplicación web fullstack para gestionar el día a día como desarrollador en formación: tareas pendientes, planificación semanal, hábitos, recursos de estudio y notas, todo en un solo lugar con diseño oscuro de inspiración japonesa.
+
+Construida desde cero como proyecto personal para practicar arquitectura fullstack real — API REST con Clean Architecture, SPA con Atomic Design, TypeScript estricto en ambos lados y persistencia progresiva (JSON → SQLite/Postgres).
+
+---
+
+## Vistas
+
+### Tareas
+Pendientes y completadas. Creación rápida con título y detalle, asignación de fecha con selector inline.
+
+![Tareas](screenshots/tareas.png)
+
+### Semana
+Vista semanal con navegación por semanas. Las tareas con fecha aparecen en su día correspondiente.
+
+![Semana](screenshots/semana.png)
+
+### Rutina
+Tracker de hábitos con frecuencia configurable (diario, lunes a viernes, días específicos), marcado por día y porcentaje mensual.
+
+![Rutina](screenshots/rutina.png)
+
+### Estudio
+Temas de aprendizaje organizados con subtemas, recursos vinculados (links, videos) e ítems con checkbox para libros y cursos.
+
+![Estudio](screenshots/estudio.png)
+
+### Notas
+Pizarra de notas de texto libre, creación y edición inline.
+
+![Notas](screenshots/notas.png)
+
+---
 
 ## Stack
 
 | Capa | Tecnologías |
 |------|-------------|
-| Frontend | Vite 8, React 19, TypeScript, Tailwind CSS v4, Zustand, React Router v7, Vitest, Testing Library |
-| Backend | Node 20+, Express 5, TypeScript, Zod, Vitest, supertest |
-| Persistencia | Archivo JSON con escritura atómica (después: SQLite/Postgres) |
-| Tooling | ESLint, Prettier, EditorConfig |
+| Frontend | Vite, React 19, TypeScript, Tailwind CSS v4, Zustand, React Router v7 |
+| Backend | Node 20+, Express 5, TypeScript, Zod |
+| Persistencia | Archivo JSON con escritura atómica (siguiente paso: SQLite/Postgres) |
+| Testing | Vitest + Testing Library (frontend), Vitest + supertest (backend) |
+| Tooling | ESLint, Prettier, EditorConfig, pnpm |
 
-## Estructura del repo
+## Arquitectura
 
 ```
 my-tasks/
-├── backend/         API REST (Clean Architecture liviana)
-│   ├── src/
-│   │   ├── domain/         entidades + interfaces (sin frameworks)
-│   │   ├── application/    casos de uso
-│   │   ├── infrastructure/ HTTP + persistencia (Express, JSON)
-│   │   └── shared/         schemas Zod, utilidades
-│   └── data/        # tasks.json (gitignored, se crea en runtime)
-├── frontend/        SPA (Atomic Design)
+├── backend/              API REST
 │   └── src/
-│       ├── components/  atoms / molecules / organisms / templates
-│       ├── pages/       containers de cada vista
-│       ├── hooks/       useTasks, etc.
-│       ├── store/       Zustand stores
-│       ├── api/         cliente HTTP
-│       ├── types/       tipos compartidos
-│       └── styles/      tema oscuro/anime con CSS variables
-├── scripts/
-│   └── start-app.sh    arranca backend + frontend juntos
-├── CLAUDE.md
-└── README.md
+│       ├── domain/       entidades + interfaces (sin frameworks)
+│       ├── application/  casos de uso
+│       ├── infrastructure/ HTTP + persistencia (Express, JSON)
+│       └── shared/       schemas Zod, utilidades
+├── frontend/             SPA
+│   └── src/
+│       ├── components/   atoms / molecules / organisms / templates
+│       ├── pages/        containers de cada vista
+│       ├── hooks/        lógica reutilizable
+│       ├── store/        Zustand stores
+│       └── api/          cliente HTTP
+└── scripts/              arranque unificado
 ```
 
-## Requisitos
+---
 
-- Node.js >= 20
-- pnpm >= 10 (instalalo con `npm i -g pnpm` o `corepack enable`)
-- WSL2 (Ubuntu) si estás en Windows
+## Setup
 
-## Primera vez
+**Requisitos:** Node.js >= 20, pnpm >= 10
 
 ```bash
+# Primera vez
 cd backend  && pnpm install
 cd ../frontend && pnpm install
+
+# Arranque diario
+./scripts/start-app.sh          # backend :4000 + frontend :5173
+./scripts/start-app.sh --open   # abre el browser automáticamente
 ```
 
-## Arranque (todos los días)
+`Ctrl+C` apaga ambos procesos limpiamente.
 
-**Opción 1 — script único (recomendado):**
-
-```bash
-./scripts/start-app.sh
-# o que abra el browser automáticamente:
-./scripts/start-app.sh --open
-```
-
-Esto arranca:
-- Backend en `http://localhost:4000`
-- Frontend en `http://localhost:5173`
-
-`Ctrl+C` apaga ambos limpiamente.
-
-**Opción 2 — terminales separadas (debug):**
+<details>
+<summary>Opciones alternativas de arranque</summary>
 
 ```bash
-# terminal 1
-cd backend && pnpm dev
-
-# terminal 2
+# Terminales separadas (debug)
+cd backend  && pnpm dev
 cd frontend && pnpm dev
 ```
 
-**Opción 3 — desde Windows con shortcut en el escritorio:**
-
-Ver `scripts/windows/README.md` para el paso a paso. Resumen:
-- `scripts/windows/my-tasks.bat` → launcher simple (ventana de cmd visible).
-- `scripts/windows/my-tasks.ps1` → launcher polish (sin ventana, abre browser
-  cuando los servers responden).
+Para Windows ver `scripts/windows/README.md`.
+</details>
 
 ## Tests
 
 ```bash
-# backend
-cd backend && pnpm test
-# frontend
+cd backend  && pnpm test
 cd frontend && pnpm test
 ```
 
+---
+
 ## Convenciones
 
-- TypeScript estricto (`strict: true`, `exactOptionalPropertyTypes: true`,
-  `noUncheckedIndexedAccess: true`).
-- `camelCase` para variables/funciones, `PascalCase` para componentes y tipos,
-  `UPPER_SNAKE_CASE` para constantes globales.
-- Tests cohabitan con el código: `Foo.ts` ↔ `Foo.test.ts`.
-- Imports absolutos con alias `@/`.
-- Commits convencionales (`feat:`, `fix:`, `refactor:`, `test:`, `chore:`).
-- Idioma: español latinoamericano estándar.
+- TypeScript estricto (`strict`, `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`)
+- `camelCase` variables/funciones · `PascalCase` componentes y tipos · `UPPER_SNAKE_CASE` constantes globales
+- Tests cohabitan con el código: `Foo.ts` ↔ `Foo.test.ts`
+- Imports absolutos con alias `@/`
+- Commits convencionales (`feat:`, `fix:`, `refactor:`, `test:`, `chore:`)
 
 ## Variables de entorno
 
 | Variable | Default | Descripción |
 |----------|---------|-------------|
-| `PORT` (backend) | `4000` | Puerto del API |
-| `FRONTEND_ORIGIN` (backend) | `http://localhost:5173` | Origen permitido por CORS |
-| `VITE_API_URL` (frontend) | `http://localhost:4000/api` | Base URL del API |
-
+| `PORT` | `4000` | Puerto del API |
+| `FRONTEND_ORIGIN` | `http://localhost:5173` | Origen permitido por CORS |
+| `VITE_API_URL` | `http://localhost:4000/api` | Base URL del API |
