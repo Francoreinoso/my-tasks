@@ -1,8 +1,8 @@
 # My Tasks
 
-Aplicación web fullstack para gestionar el día a día como desarrollador en formación: tareas pendientes, planificación semanal, hábitos, recursos de estudio y notas, todo en un solo lugar con diseño oscuro de inspiración japonesa.
+Aplicación web fullstack para gestionar el día a día como desarrollador en formación: tareas pendientes, planificación semanal, hábitos, recursos de estudio y notas.
 
-Construida desde cero como proyecto personal para practicar arquitectura fullstack real — API REST con Clean Architecture, SPA con Atomic Design, TypeScript estricto en ambos lados y persistencia progresiva (JSON → SQLite/Postgres).
+Construida desde cero como proyecto personal para practicar arquitectura fullstack real — API REST con Clean Architecture, SPA con Atomic Design, TypeScript estricto en ambos lados y persistencia progresiva (JSON → SQLite).
 
 ---
 
@@ -103,19 +103,3 @@ cd frontend && pnpm test
 ```
 
 ---
-
-## Convenciones
-
-- TypeScript estricto (`strict`, `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`)
-- `camelCase` variables/funciones · `PascalCase` componentes y tipos · `UPPER_SNAKE_CASE` constantes globales
-- Tests cohabitan con el código: `Foo.ts` ↔ `Foo.test.ts`
-- Imports absolutos con alias `@/`
-- Commits convencionales (`feat:`, `fix:`, `refactor:`, `test:`, `chore:`)
-
-## Variables de entorno
-
-| Variable | Default | Descripción |
-|----------|---------|-------------|
-| `PORT` | `4000` | Puerto del API |
-| `FRONTEND_ORIGIN` | `http://localhost:5173` | Origen permitido por CORS |
-| `VITE_API_URL` | `http://localhost:4000/api` | Base URL del API |
